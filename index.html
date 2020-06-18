@@ -1,0 +1,1731 @@
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>04. Technical Documentation</title>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Girassol&family=Roboto:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <nav id="navbar">
+            <header id="nav-header">Command-Line Basics</header>
+            <ul id="nav-list">
+                <li class="nav-title"><a class="nav-link" href="#introduction">Introduction</a></li>
+                <li class="nav-title"><a class="nav-link" href="#1._home_directory_(~)">1. Home directory (<code>~</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#2._present_working_directory_(pwd)">2. Present working directory (<code>pwd</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#3._list_files_and_directories_(ls)">3. List files and directories (<code>ls</code>)</a></li>
+                <li><a class="nav-sub-link" href="#3.1_listing_a_different_directory">3.1 Listing a different directory</a></li>
+                <li><a class="nav-sub-link" href="#3.2_listing_all_files_(-a)">3.2 Listing all files (<code>-a</code>)</a></li>
+                <li><a class="nav-sub-link" href="#3.3_long_form_listing_(-l)">3.3 Long form listing (<code>-l</code>)</a></li>
+                <li><a class="nav-sub-link" href="#3.4_human_readable_sizes_(-h)">3.4 Human readable sizes (<code>-h</code>)</a></li>
+                <li><a class="nav-sub-link" href="#3.5_sorting_by_size_(-S)">3.5 Sorting by size (<code>-S</code>)</a></li>
+                <li><a class="nav-sub-link" href="#3.6_sorting_by_last_modified_time_(-t)">3.6 Sorting by last modified time (<code>-t</code>)</a></li>
+                <li><a class="nav-sub-link" href="#3.7_reverse_sort_(-r)">3.7 Reverse sort (<code>-r</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#4._links_(ln)">4. Links (<code>ln</code>)</a></li>
+                <li><a class="nav-sub-link" href="#4.1_hard_links_(ln)">4.1 Hard links (<code>ln</code>)</a></li>
+                <li><a class="nav-sub-link" href="#4.2_forcing_a_link_(-f)">4.2 Forcing a link (<code>-f</code>)</a></li>
+                <li><a class="nav-sub-link" href="#4.3_symbolic_links_(-s)">4.3 Symbolic links (<code>-s</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#5._change_directories_(cd)">5. Change Directories (<code>cd</code>)</a></li>
+                <li><a class="nav-sub-link" href="#5.1_navigating_up_(..)">5.1 Navigating up (<code>..</code>)</a></li>
+                <li><a class="nav-sub-link" href="#5.2_navigating_to_the_home_directory_(cd)">5.2 Navigating to the home directory (<code>cd</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#6._creating_directories_(mkdir)">6. Creating directories (<code>mkdir</code>)</a></li>
+                <li><a class="nav-sub-link" href="#6.1_create_intermediate_directories_(-p)">6.1 Create intermediate directories (<code>-p</code>)</a></li>
+                <li><a class="nav-sub-link" href="#6.2_verbose_output_(-v)">6.2 Verbose output (<code>-v</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#7._copying_files_(cp)">7. Copying files (<code>cp</code>)</a></li>
+                <li><a class="nav-sub-link" href="#7.1_copying_a_single_file_(cp)">7.1 Copying a single file (<code>cp</code>)</a></li>
+                <li><a class="nav-sub-link" href="#7.2_copying_multiple_files_(cp)">7.2 Copying multiple files (<code>cp</code>)</a></li>
+                <li><a class="nav-sub-link" href="#7.3_verbose_output_(-v)">7.3 Verbose output (<code>-v</code>)</a></li>
+                <li><a class="nav-sub-link" href="#7.4_copying_directories_(-R)">7.4 Copying directories (<code>-R</code>)</a></li>
+                <li><a class="nav-sub-link" href="#7.5_force_overwriting_of_a_file_(-f)">7.5 Force overwriting of a file (<code>-f</code>)</a></li>
+                <li><a class="nav-sub-link" href="#7.6_confirm_overwriting_of_a_file_(-i)">7.6 Confirm overwriting of a file (<code>-i</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#8._deleting_files_(rm)">8. Deleting files (<code>rm</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#9._moving_files_(mv)">9. Moving files (<code>mv</code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#10._input_/_output_(|,_>)">10. Input / Output (<code>|</code>, <code>></code>)</a></li>
+                <li><a class="nav-sub-link" href="#10.1_redirecting_output_(|)">10.1 Redirecting output (<code>|</code>)</a></li>
+                <li><a class="nav-sub-link" href="#10.2_writing_to_a_file_(>)">10.2 Writing to a file (<code>></code>)</a></li>
+                <li class="nav-title"><a class="nav-link" href="#11._reference">11. Reference</a></li>
+            </ul>
+        </nav>
+        <main id="main-doc">
+            <section class="main-section" id="introduction">
+                <header class="main-header">Introduction</header>
+                <article>
+                    <p>A command-line interface (CLI) processes commands to a computer program in the form of lines of text. The program which handles the interface is called a command-line interpreter or command-line processor. Operating systems implement a command-line interface in a shell for interactive access to operating system functions or services. Such access was primarily provided to users by computer terminals starting in the mid-1960s, and continued to be used throughout the 1970s and 1980s on VAX/VMS, Unix systems and personal computer systems including DOS, CP/M and Apple DOS.</p>
+                    <p>It’s important to have a firm grasp on the basics of how to use the Unix (or Linux) command line, this includes:</p>
+                    <ul>
+                        <li>Navigating around directories</li>
+                        <li>Copying and moving files</li>
+                        <li>Creating files</li>
+                    </ul>
+                </article>
+            </section>
+            <section class="main-section" id="1._home_directory_(~)">
+                <header class="main-header">1. Home Directory (<code>~</code>)</header>
+                <article>
+                    <p>
+                        On Unix and Linux systems, every user has a “home” directory. 
+                        This directory is yours and yours alone. 
+                        The location of your home directory varies depending on which operating system you’re on. 
+                        For example, on Mac OS X it’s <code><b>/Users/&lt;username&gt;</b></code>,
+                        but on Ubuntu systems, it’s <code><b>/Users/&lt;username&gt;</b></code>.
+                    </p>
+                    <p>
+                        Finding your home directory is incredibly easy.
+                        When you first log into your system you will automatically be placed in your home directory by default.
+                        With this knowledge, you can use the <code><b>pwd</b></code> command (<a class="links-inline" href="#2._present_working_directory_(pwd)">Section 2</a>) to get the path of your home directory.
+                    </p>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 1.1:</span>
+                            <span class="list-description">$ pwd</span>
+                        </div>
+                        <div class="code-description">
+                            <code>/users/markbates</code>
+                        </div>
+                    </div>
+                    <p>
+                        Your home directory will be where your settings files get stored and where your desktop is kept. 
+                        The home directory (or subdirectories under your home directory) is also where you will save documents and files that are yours and not to be shared with others.
+                    </p>
+                    <p>
+                        By default, your home directory will be unreadable and inaccessible to all other users apart from yourself (and root).
+                        You can change these permissions, if you want, but I would recommend against making such a change.
+                    </p>
+                    <p>
+                        It is quite common to see a tilde ( <code><b>~</b></code> ) in place of the full path for a home directory. 
+                        The <code><b>~</b></code> will expand to be the path of your home directory when you use commands such as <code><b>cd</b></code> (<a class="links-inline" href="#5._change_directories_(cd)">Section 6</a>).
+                    </p>
+                </article>
+            </section>
+            <section class="main-section" id="2._present_working_directory_(pwd)">
+                <header class="main-header">2. Present Working Directory (<code>pwd</code>)</header>
+                <article>
+                    <p>
+                        Understanding where you are at any given time in your file system is important.
+                        This information can help you build paths to other files or help you if you get lost.
+                        To find out where you are you can use the <code><b>pwd</b></code> command.
+                    </p>
+                    <div class="code-box">
+                        <div class="code-highlight">
+                            <code>
+                                $ pwd
+                            </code>
+                        </div>
+                    </div>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 2.1:</span>
+                            <span class="list-description">$ pwd</span>
+                        </div>
+                        <div class="code-description">
+                            <code>/Users/markbates/development/unix_commands</code>
+                        </div>
+                    </div>
+                    <p>
+                        In Listing 2.1 you can see the directory I’m currently working in.
+                        For me, it’s the directory that I’m writing this book in.
+                    </p>
+                    <p>
+                        By default, <code><b>pwd</b></code> will list the “logical” path of your current directory.
+                        This means it will treat symlinked paths (see <a class="links-inline" href="#4.3_symbolic_links_(-s)">Section 4.3</a>) as if they were the actual paths.
+                        For example, my development directory doesn’t exist under my home folder, <code><b>/Users/markbates</b></code>;
+                        instead it is symlinked to a folder inside of <code><b>/Users/markbates/Dropbox</b></code>.
+                    </p>
+                    <p>
+                        If we want to see the actual physical path, with all of the symlinks resolved, we can use the <code><b>-P</b></code> flag.
+                    </p>
+                    <div class="code-box">
+                        <div class="code-highlight">
+                            <code>
+                                $ pwd -P
+                            </code>
+                        </div>
+                    </div>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 2.2:</span>
+                            <span class="list-description">$ pwd -P</span>
+                        </div>
+                        <div class="code-description">
+                            <code>/Users/markbates/Dropbox/development/unix_commands</code>
+                        </div>
+                    </div>
+                    <p>
+                        Listing 2.2 shows the actual full path to my current working directory.
+                    </p>
+                </article>
+            </section>
+            <section class="main-section" id="3._list_files_and_directories_(ls)">
+                <header class="main-header">3. List Files and Directories (<code>ls</code>)</header>
+                <article>
+                    <p>
+                        Often it is useful to be able to see what files or directories are in your current directory, or another directory.
+                        To accomplish this we can use the <code><b>ls</b></code> command.
+                    </p>
+                    <div class="code-box">
+                        <div class="code-highlight">
+                            <code>
+                                $ ls
+                            </code>
+                        </div>
+                    </div>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 3.1:</span>
+                            <span class="list-description">$ ls</span>
+                        </div>
+                        <div class="code-description code-description-grid">
+                            <code>Aplications</code>
+                            <code>Calibre Lib</code>
+                            <code>Desktop</code>
+                            <code>Documents</code>
+                            <code>Downloads</code>
+                            <code>Dropbox</code>
+                            <code>Library</code>
+                            <code>Music</code>
+                            <code>Pictures</code>
+                            <code>Public</code>
+                            <code>Sites</code>
+                            <code>development</code>
+                            <code>screencasts</code>
+                            <code>scripts</code>
+                        </div>
+                    </div>
+                    <p>
+                        Listing 3.1 shows the list of folders and files in my current directory, which for me would be my home directory, <code><b>/Users/markbates</b></code>.
+                        I will be using my home directory for all of the examples in this section, unless otherwise noted.
+                    </p>
+                    <div class="sub-section" id="3.1_listing_a_different_directory">
+                        <h2 class="sub-section-title">3.1 Listing a different directory</h2>
+                        <p>
+                            By default, <code><b>ls</b></code> will operate in the current directory that you’re in.
+                            However, you may want to find out what files are in another directory, without first leaving your current directory.
+                            The <code><b>ls</b></code> command will let you pass it a path to work on.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls /usr/local/
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 3.1.1:</span>
+                                <span class="list-description">$ ls /usr/local/</span>
+                            </div>
+                            <div class="code-description code-description-grid">
+                                <code>CONTRIBUTING.md</code>
+                                <code>Cellar</code>
+                                <code>Frameworks</code>
+                                <code>Library</code>
+                                <code>README.md</code>
+                                <code>SUPPORTERS.md</code>
+                                <code>bin</code>
+                                <code>etc</code>
+                                <code>foreman</code>
+                                <code>go</code>
+                                <code>heroku</code>
+                                <code>include</code>
+                                <code>lib</code>
+                                <code>opt</code>
+                                <code>sbin</code>
+                                <code>share</code>
+                                <code>texlive</code>
+                                <code>var</code>
+                            </div>
+                        </div>
+                        <p>
+                            Listing 3.1.1 shows the files and directories inside of the <code><b>/usr/local</b></code> directory, without having to leave the current directory that I am in.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="3.2_listing_all_files_(-a)">
+                        <h2 class="sub-section-title">3.2 Listing all Files (<code>-a</code>)</h2>
+                        <p>
+                            So far we have seen all of the “visible” files and directories listed, however, it is common on Unix and Linux based machines to have “invisible”, or “hidden”, files that are prefixed with a “.” (dot).
+                        </p>
+                        <p>
+                            Using the <code><b>-a</b></code> flag we can see both “visible” and “hidden” files and directories.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -a
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 3.2.1:</span>
+                                <span class="list-description">$ ls -a</span>
+                            </div>
+                            <div class="code-description code-description-grid">
+                                <code>.</code>
+                                <code>.adobe</code>
+                                <code>Aplications</code>
+                                <code>.bashrc</code>
+                                <code>Calibre Lib</code>
+                                <code>.config</code>
+                                <code>.ctags</code>
+                                <code>Desktop</code>
+                                <code>Development</code>
+                                <code>Documents</code>
+                                <code>Downloads</code>
+                                <code>.dropbox</code>
+                                <code>Dropbox</code>
+                                <code>.DS_Store</code>
+                                <code>.gitconfig</code>
+                                <code>Library</code>
+                                <code>.local</code>
+                                <code>Music</code>
+                                <code>Pictures</code>
+                                <code>Public</code>
+                                <code>Screencasts</code>
+                                <code>scripts</code>
+                                <code>Sites</code>
+                                <code>.vscode</code>
+                                <code>vstore.dat</code>
+                            </div>
+                        </div>
+                        <p>
+                            Listing 3.2.1 now shows significantly more files and directories than Listing 3.1 because the <code><b>-a</b></code> flag is including all of the “hidden” files, as well as the “visible” ones.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="3.3_long_form_listing_(-l)">
+                        <h2 class="sub-section-title">3.3 Long Form Listing (<code>-l</code>)</h2>
+                        <p>
+                            So far in the section, whenever we have used the <code><b>ls</b></code> command, we have been given back a list of names, arranged in a column.
+                            One of the most useful flags for <code><b>ls</b></code>> is the <code><b>-l</b></code> flag that will list out the names of the files and directories as well as give more detailed information about them.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -l
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 3.3.1:</span>
+                                <span class="list-description">$ ls -l</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">16</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">544</code>
+                                <code>Aug</code>
+                                <code class="align-right">19</code>
+                                <code class="align-right">13:58</code>
+                                <code>Applications</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">5</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">170</code>
+                                <code>Dec</code>
+                                <code class="align-right">6</code>
+                                <code class="align-right">16:20</code>
+                                <code>Calibre Lib</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">33</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Desktop</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">35</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Documents</code>
+                                <code>drwx-----+</code>
+                                <code class="align-right">140</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">4760</code>
+                                <code>Dec</code>
+                                <code class="align-right">16</code>
+                                <code class="align-right">13:44</code>
+                                <code>Downloads</code>
+                            </div>
+                            <div class="lazy-msg">(This isn't the full list, but you get the point, right?)</div>
+                        </div>
+                        <p>
+                            In Listing 3.3.1 we see a significant amount of information being presented to us for each file and directory.
+                            If the <code><b>-l</b></code> option is given, the following information is displayed for each file:
+                        </p>
+                        <ul>
+                            <li>File mode</li>
+                            <li>Number of links</li>
+                            <li>Owner name</li>
+                            <li>Group name</li>
+                            <li>Number of bytes in the file</li>
+                            <li>Abbreviated month</li>
+                            <li>Day-Of-Month file was last modified</li>
+                            <li>Hour:Minute file last modified, or the year, in case it's not the present year</li>
+                            <li>Pathname</li>
+                        </ul>
+                    </div>
+                    <div class="sub-section" id="3.4_human_readable_sizes_(-h)">
+                        <h2 class="sub-section-title">3.4 Human Readable Sizes (<code>-h</code>)</h2>
+                        <p>
+                            In Section 3.3 we used the <code><b>-l</b></code> flag to give us a more detailed view of files and directories in our current directory, including the number of bytes in the file.
+                            While knowing the number of bytes can be useful, I find it more useful to see the size of the file in human readable terms, such as <code><b>1.7K</b></code> or <code><b>35M</b></code>.
+                            Thankfully <code><b>ls</b></code> will give us this information if we use the <code><b>-h</b></code> flag.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -lh
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 3.4.1:</span>
+                                <span class="list-description">$ ls -lh</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">16</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">544B</code>
+                                <code>Aug</code>
+                                <code class="align-right">19</code>
+                                <code class="align-right">13:58</code>
+                                <code>Applications</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">5</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">170B</code>
+                                <code>Dec</code>
+                                <code class="align-right">6</code>
+                                <code class="align-right">16:20</code>
+                                <code>Calibre Lib</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">33B</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Desktop</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">35B</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Documents</code>
+                                <code>drwx-----+</code>
+                                <code class="align-right">140</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">4.6K</code>
+                                <code>Dec</code>
+                                <code class="align-right">16</code>
+                                <code class="align-right">13:44</code>
+                                <code>Downloads</code>
+                            </div>
+                            <div class="lazy-msg">(This isn't the full list, but you get the point, right?)</div>
+                        </div>
+                        <p>
+                            In Listing 3.4.1 we see we now have an easier to understand description of the size of the files in the directory.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="3.5_sorting_by_size_(-S)">
+                        <h2 class="sub-section-title">3.5 Sorting by Size (<code>-S</code>)</h2>
+                        <p>
+                            Another useful flag we can use with
+                            <code><b>ls</b></code> is
+                            <code><b>-S</b></code>,
+                            which will sort the results of
+                            <code><b>ls</b></code>
+                            by file size, instead of the default sorting by name.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -lhS
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 3.5.1:</span>
+                                <span class="list-description">$ ls -lhS</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>drwx-----+</code>
+                                <code class="align-right">140</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">4.6K</code>
+                                <code>Dec</code>
+                                <code class="align-right">16</code>
+                                <code class="align-right">13:44</code>
+                                <code>Downloads</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">16</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">544B</code>
+                                <code>Aug</code>
+                                <code class="align-right">19</code>
+                                <code class="align-right">13:58</code>
+                                <code>Applications</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">5</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">170B</code>
+                                <code>Dec</code>
+                                <code class="align-right">6</code>
+                                <code class="align-right">16:20</code>
+                                <code>Calibre Lib</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">35B</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Documents</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">33B</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Desktop</code>
+                            </div>
+                            <div class="lazy-msg">(This isn't the full list, but you get the point, right?)</div>
+                        </div>
+                        <p>
+                            In Listing 3.5.1 the results of <code><b>ls</b></code> are displayed with the largest files at the top, and the smallest files at the bottom.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="3.6_sorting_by_last_modified_time_(-t)">
+                        <h2 class="sub-section-title">3.6 Sorting by Last Modified Time (<code>-t</code>)</h2>
+                        <p>
+                            It can often be useful to be able to sort your
+                            <code><b>ls</b></code> results by the last time the files where modified.
+                            To do this we can use the
+                            <code><b>-t</b></code> flag.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -lt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 3.6.1:</span>
+                                <span class="list-description">$ ls -lt</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>drwx-----+</code>
+                                <code class="align-right">140</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">4.6K</code>
+                                <code>Dec</code>
+                                <code class="align-right">16</code>
+                                <code class="align-right">13:44</code>
+                                <code>Downloads</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">5</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">170B</code>
+                                <code>Dec</code>
+                                <code class="align-right">6</code>
+                                <code class="align-right">16:20</code>
+                                <code>Calibre Lib</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">16</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">544B</code>
+                                <code>Aug</code>
+                                <code class="align-right">19</code>
+                                <code class="align-right">13:58</code>
+                                <code>Applications</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">35B</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Documents</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">33B</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Desktop</code>
+                            </div>
+                            <div class="lazy-msg">(This isn't the full list, but you get the point, right?)</div>
+                        </div>
+                        <p>
+                            In Listing 3.5.1 the results of <code><b>ls</b></code> are displayed with the largest files at the top, and the smallest files at the bottom.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="3.7_reverse_sort_(-r)">
+                        <h2 class="sub-section-title">3.7 Reverse Sort (<code>-r</code>)</h2>
+                        <p>
+                            When you are listing a directory that contains many files, sorting with
+                            <code><b>ls</b></code>
+                            is a great way to help quickly find the files or directories you are looking for.
+                            By default, <code><b>ls</b></code> sorts all of its results alphabetically.
+                            Using the <code><b>-r</b></code> flag we are able to reverse the results of <code><b>ls</b></code>.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -lr
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 3.7.1:</span>
+                                <span class="list-description">$ ls -lr</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>drwx-----+</code>
+                                <code class="align-right">140</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">4760</code>
+                                <code>Dec</code>
+                                <code class="align-right">16</code>
+                                <code class="align-right">13:44</code>
+                                <code>Downloads</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">35</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Documents</code>
+                                <code>lrwxr-xr-x</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">33</code>
+                                <code>Jul</code>
+                                <code class="align-right">26</code>
+                                <code class="align-right">2012</code>
+                                <code>Desktop</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">5</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">170</code>
+                                <code>Dec</code>
+                                <code class="align-right">6</code>
+                                <code class="align-right">16:20</code>
+                                <code>Calibre Lib</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">16</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">544</code>
+                                <code>Aug</code>
+                                <code class="align-right">19</code>
+                                <code class="align-right">13:58</code>
+                                <code>Applications</code>
+                            </div>
+                            <div class="lazy-msg">(This isn't the full list, but you get the point, right?)</div>
+                        </div>
+                        <p>
+                            In Listing 3.7.1 we can see that default sort of <code><b>ls</b></code>,
+                            alphabetically, has now been reversed with <code><b>Downloads</b></code>
+                            at the top of the list, and <code><b>Applications</b></code> at the bottom.
+                        </p>
+                        <p>
+                            We can also use the <code><b>-r</b></code> flag with other options to reverse their sort order. 
+                            For example, <code><b>ls -lSr</b></code> will list the files by size with smaller files listed first.
+                        </p>
+                    </div>
+                </article>
+            </section>
+            <section class="main-section" id="4._links_(ln)">
+                <header class="main-header">4. Links (<code>ln</code>)</header>
+                <article>
+                    <p>
+                        Links allow us to create an association from one file or directory to another.
+                        A link allows us to “point” one file or directory to another. 
+                        This can be quite useful for maintaining a sane file system, or for having multiple versions of a file or directory, and not wanting to use disk space to store copies of those files.
+                    </p>
+                    <p>
+                        An example of where links can come in handy is when deploying a web application.
+                        Let’s say when you deploy your application you create a new directory whose name is the current time, and you put your application code into that directory. 
+                        After your code is there, you would have to edit your web server configuration to tell it to point to the new directory where your latest code is. 
+                        However, using links you can create a link called “current” that your web server points at, and you can change where the “current” link points to - in this case the last timestamped folder you created for your code.
+                    </p>
+                    <p>
+                        Links can either be “hard” or “symbolic” as we’ll see in the following sections.
+                    </p>
+                    <div class="sub-section" id="4.1_hard_links_(ln)">
+                        <h2 class="sub-section-title">4.1 Hard Links (<code>ln</code>)</h2>
+                        <p>
+                            We can use the
+                            <code><b>ln</b></code> command to create a link between two files.
+                            By default, the
+                            <code><b>ln</b></code> command will create a hard link between these files.
+                        </p>
+                        <p>
+                            Hard links create an identical copy of the linked file on disk, that gets updated automatically as the source file gets updated. 
+                            That means if the content of the source is changed, so will the target file.
+                        </p>
+                        <p>
+                            To create a link to a file, we call the 
+                            <code><b>ln</b></code>
+                            command - first giving it the name of the file we want to link to (our source file), followed by the name of the linked file we want to create (the target).
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ln a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 4.1.1:</span>
+                                <span class="list-description">$ ls -l</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">2</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">12</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">16:46</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">2</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">12</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">16:46</code>
+                                <code>b.txt</code>
+                            </div>
+                        </div>
+                        <p>
+                            Listing 4.1.1 shows the newly created 
+                            <code><b>b.txt</b></code> has all of the same properties as the 
+                            <code><b>a.txt</b></code> file.
+                        </p>
+                        <p>
+                            An important thing to note about hard links is that they only work on the current file system. 
+                            You can not create a hard link to a file on a different file system. 
+                            To do that you need to use symbolic links, <a href="#4.3_symbolic_links_(-s)" class="links-inline">Section 4.3</a>.
+                        </p>
+                        <p>
+                            While the content of the source and target files are linked, if the source file gets deleted,
+                            the target file will continue to live as an independent file, despite the severed link.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ rm a.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 4.1.2:</span>
+                                <span class="list-description">$ ls -l</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">2</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">12</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">16:46</code>
+                                <code>b.txt</code>
+                            </div>
+                        </div>
+                        <p>
+                            In Listing 4.1.2 we can see that the <code><b>b.txt</b></code> file still exists, despite the target file having been deleted.
+                        </p>
+                        <p>
+                            If we were to use the <code><b>cat</b></code> tool from Chapter 9, Section 9.2, we can see that the contents of
+                            <code><b>b.txt</b></code> are still intact.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cat b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 4.1.3:</span>
+                                <span class="list-description">$ cat b.txt</span>
+                            </div>
+                            <div class="code-description">
+                                <code>Hello World</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-section" id="4.2_forcing_a_link_(-f)">
+                        <h2 class="sub-section-title">4.2 Forcing a Link (<code>-f</code>)</h2>
+                        <p>
+                            If the source file already exists you will get an error, like that in Listing 4.2.1.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ln a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 4.2.1:</span>
+                                <span class="list-description">$ ln a.txt b.txt</span>
+                            </div>
+                            <div class="code-description">
+                                <code>ln: b.txt: File exists</code>
+                            </div>
+                        </div>
+                        <p>
+                            To fix the error in Listing 4.2.1 you can pass the <code><b>-f</b></code> flag to force the link.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ln -f a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-section" id="4.3_symbolic_links_(-s)">
+                        <h2 class="sub-section-title">4.1 Symbolic Links (<code>-s</code>)</h2>
+                        <p>
+                            We have seen that the default type of link that gets created when using
+                            <code><b>ln</b></code> is that of a hard link.
+                            To create a link to a directory, we can use the
+                            <code><b>-s</b></code> flag to create a symbolic link.
+                            This can also be used for linking to files as well, not just directories.
+                        </p>
+                        <p>
+                            Symbolic links can also link to files or directories on other file systems. 
+                            This makes symbolic links (symlinks) more powerful, and more common than the default hard links.
+                        </p>
+                        <p>
+                            To create a symbolic link we can use the
+                            <code><b>-s</b></code> flag.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ln -s a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 4.3.1:</span>
+                                <span class="list-description">$ ls -l</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">12</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">17:01</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">5</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">17:12</code>
+                                <code>b.txt -> a.txt</code>
+                            </div>
+                        </div>
+                        <p>
+                            Listing 4.3.1 shows we have created a symbolic link from
+                            <code><b>a.txt</b></code> to <code><b>b.txt</b></code>.
+                            See <a class="links-inline" href="#3.3_long_form_listing_(-l)">Section 3.3</a>
+                            for an explanation of how to read Listing 4.3.1.
+                        </p>
+                        <p>
+                            Listing 4.3.2 shows the results of creating a hard link, and Listing 4.3.3 shows the results of a symbolic link.
+                        </p>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 4.3.2:</span>
+                                <span class="list-description">$ ln a.txt b.txt</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">2</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">12</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">16:46</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">2</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">12</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">16:46</code>
+                                <code>b.txt</code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 4.3.3:</span>
+                                <span class="list-description">$ ln -s a.txt b.txt</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">12</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">17:01</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">5</code>
+                                <code>Dec</code>
+                                <code class="align-right">17</code>
+                                <code class="align-right">17:12</code>
+                                <code>b.txt -> a.txt</code>
+                            </div>
+                        </div>
+                        <p>
+                            Notice that the file timestamps and size are identical in Listing 4.3.2 with the hard link, 
+                            but they are different in Listing 4.3.3 for the symbolic link. 
+                            The reason for the difference is that with the symbolic link the operating system creates a new, 
+                            small file that points to the target file or directory.
+                        </p>
+                    </div>
+                </article>
+            </section>
+            <section class="main-section" id="5._change_directories_(cd)">
+                <header class="main-header">5. Change Directories (<code>cd</code>)</header>
+                <article>
+                    <p>
+                        While staying in the same directory all of the time might seem like fun, eventually you’ll need to change, or navigate, into another directory. 
+                        To do this we can use the very simple 
+                        <code><b>cd</b></code> command.
+                    </p>
+                    <p>
+                        <code><b>cd</b></code> takes one argument - the path to the directory you wish to navigate to.
+                    </p>
+                    <div class="code-box">
+                        <div class="code-highlight">
+                            <code>
+                                $ cd ~/Documents
+                            </code>
+                        </div>
+                    </div>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 5.1:</span>
+                            <span class="list-description">$ pwd</span>
+                        </div>
+                        <div class="code-description">
+                            <code>/Users/markbates/Documents</code>
+                        </div>
+                    </div>
+                    <p>
+                        In Listing 5.1 I have successfully navigated to my 
+                        <code><b>Documents</b></code> directory, and we can use the
+                        <code><b>pwd</b></code> command 
+                        (<a href="#2._present_working_directory_(pwd)" class="links-inline">Section 2</a>) to prove it.
+                    </p>
+                    <div class="sub-section" id="5.1_navigating_up_(..)">
+                        <h2 class="sub-section-title">5.1 Navigating Up (<code>..</code>)</h2>
+                        <p>
+                            Once inside of a directory, it can be useful to be able to navigate back up a directory. 
+                            One way to do this would be to call <code><b>cd</b></code> 
+                            giving it the full path to the directory you want to go. 
+                            Another way to accomplish the task of moving up to the parent directory is to use the special path 
+                            <code><b>..</b></code>.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ..
+                                </code>
+                            </div>
+                        </div>
+                        <p>
+                            Telling <code><b>cd</b></code> to navigate to
+                            <code><b>..</b></code> will cause it to navigate to the parent directory of the current directory.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="5.2_navigating_to_the_home_directory_(cd)">
+                        <h2 class="sub-section-title">5.2 Navigating to the Home Directory (<code>cd</code>)</h2>
+                        <p>
+                            When you are in a directory and want to navigate back to your home directory, you can call 
+                            <code><b>cd</b></code> without any arguments.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cd
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 5.2.1:</span>
+                                <span class="list-description">$ pwd</span>
+                            </div>
+                            <div class="code-description">
+                                <code>/Users/markbates</code>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <section class="main-section" id="6._creating_directories_(mkdir)">
+                <header class="main-header">6. Creating Directories (<code>mkdir</code>)</header>
+                <article>
+                    <p>
+                        Directories are a great place to store and organize files, and creating them is easy. 
+                        To create a directory we can use the <code><b>mkdir</b></code>
+                        command followed by the name of the directory we wish to create.
+                    </p>
+                    <div class="code-box">
+                        <div class="code-highlight">
+                            <code>
+                                $ mkdir
+                            </code>
+                        </div>
+                    </div>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 6.1:</span>
+                            <span class="list-description">$ ls -l</span>
+                        </div>
+                        <div class="code-description code-description-grid2">
+                            <code>drwxr-xr-x</code>
+                            <code class="align-right">2</code>
+                            <code>markbates</code>
+                            <code>staff</code>
+                            <code class="align-right">68</code>
+                            <code>Dec</code>
+                            <code class="align-right">18</code>
+                            <code class="align-right">13:20</code>
+                            <code>foo</code>
+                        </div>
+                    </div>
+                    <div class="sub-section" id="6.1_create_intermediate_directories_(-p)">
+                        <h2 class="sub-section-title">6.1 Create Intermediate Directories (<code>-p</code>)</h2>
+                        <p>
+                            The <code><b>mkdir</b></code>
+                            command will allow us to create nested directories using the
+                            <code><b>-p</b></code> flag.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ mkdir -p a/b/c
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 6.1.1:</span>
+                                <span class="list-description">$ ls -la a/b/c</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">2</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">68</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:23</code>
+                                <code>.</code>
+                                <code>drwxr-xr-x</code>
+                                <code class="align-right">3</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">102</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:23</code>
+                                <code>..</code>
+                            </div>
+                        </div>
+                        <p>
+                            In Listing 6.1.1 we can use the <code><b>ls</b></code> command 
+                            (<a class="inline-links" href="#3._list_files_and_directories_(ls)">Section 3</a>) 
+                            to see that the <code><b>c</b></code> directory exists and is currently empty.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="6.2_verbose_output_(-v)">
+                        <h2 class="sub-section-title">6.2 Verbose Output (<code>-v</code>)</h2>
+                        <p>
+                            The <code><b>mkdir</b></code>
+                            command supports a verbose mode flag,
+                            <code><b>-v</b></code>. Adding the 
+                            <code><b>-v</b></code> flag will print the results of
+                            <code><b>mkdir</b></code> to the console.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ mkdir -v a
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 6.2.1:</span>
+                                <span class="list-description">$ mkdir -v a</span>
+                            </div>
+                            <div class="code-description">
+                                <code>mkdir: created directory 'a'</code>
+                            </div>
+                        </div>
+                        <p>
+                            Using the <code><b>-v</b></code> flag can provide useful reporting when writing scripts that will execute a lot of commands for you.
+                        </p>
+                    </div>
+                </article>
+            </section>
+            <section class="main-section" id="7._copying_files_(cp)">
+                <header class="main-header">7. Copying Files (<code>cp</code>)</header>
+                <article>
+                    <p>
+                        Copying files and directories can be accomplished using the
+                        <code><b>cp</b></code> command.
+                    </p>
+                    <div class="sub-section" id="7.1_copying_a_single_file_(cp)">
+                        <h2 class="sub-section-title">7.1 Copying a Single File (<code>cp</code>)</h2>
+                        <p>
+                            To copy a single file we can call the <code><b>cp</b></code> command with two arguments. 
+                            The first argument is the file we want to copy, the source file. 
+                            The second argument, or target, is the location we want to copy the source file to. 
+                            This target can either be the name of the file you wish to copy to, or the directory you wish to copy to. 
+                            If you specify just a directory then the original file name of the source file will be used to create the new file in the target directory.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.1.1:</span>
+                                <span class="list-description">$ ls -l</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:34</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:41</code>
+                                <code>b.txt</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-section" id="7.2_copying_multiple_files_(cp)">
+                        <h2 class="sub-section-title">7.2 Copying Multiple Files (<code>cp</code>)</h2>
+                        <p>
+                            <code><b>cp</b></code> will allow you to list several files you would like to copy. 
+                            When you do this, however, the last argument must be a directory, 
+                            and the original file names of the source files will be used as the names of the new files in the target directory.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp a.txt b.txt foo
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.2.1:</span>
+                                <span class="list-description">$ ls -l foo</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:47</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:47</code>
+                                <code>b.txt</code>
+                            </div>
+                        </div>
+                        <p>
+                            We can also pass simple patterns to <code><b>cp</b></code>
+                            to achieve the same results as in Listing 7.2.1.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp *.txt foo
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.2.2:</span>
+                                <span class="list-description">$ ls -l foo</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:47</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:47</code>
+                                <code>b.txt</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-section" id="7.3_verbose_output_(-v)">
+                        <h2 class="sub-section-title">7.3 Verbose Output (<code>-v</code>)</h2>
+                        <p>
+                            The <code><b>cp</b></code> command will print verbose output 
+                            regarding the files that were copied using the <code><b>-v</b></code> flag.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp -v a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.3.1:</span>
+                                <span class="list-description">$ cp -v a.txt b.txt</span>
+                            </div>
+                            <div class="code-description">
+                                <code>a.txt -> b.txt</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-section" id="7.4_copying_directories_(-R)">
+                        <h2 class="sub-section-title">7.4 Copying Directories (<code>-R</code>)</h2>
+                        <p>
+                            By default <code><b>cp</b></code> expects the source to be copied to be a file. 
+                            If we try to copy a directory to another directory we will get the error we see in Listing 7.4.1
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp foo bar
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.4.1:</span>
+                                <span class="list-description">$ cp foo bar</span>
+                            </div>
+                            <div class="code-description">
+                                <code>cp: foo is a directory (not copied).</code>
+                            </div>
+                        </div>
+                        <p>
+                            To fix the error in Listing 7.4.1, we can use the <code><b>-R</b></code>
+                            flag to recursively copy the directory’s contents to the new directory.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp -Rv foo bar
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.4.2:</span>
+                                <span class="list-description">$ cp -Rv foo bar</span>
+                            </div>
+                            <div class="code-description code-description-grid-row">
+                                <code>foo -> bar</code>
+                                <code>foo/a.txt -> bar/a.txt</code>
+                                <code>foo/b.txt -> bar/b.txt</code>
+                                <code>foo/c.txt -> bar/c.txt</code>
+                            </div>
+                        </div>
+                        <p>
+                            Using the verbose flag, <code><b>-v</b></code>, 
+                            we can see in Listing 7.4.2 all of the files from the source directory, 
+                            <code><b>foo</b></code>, have been copied to the target directory, <code><b>bar</b></code>.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="7.5_force_overwriting_of_a_file_(-f)">
+                        <h2 class="sub-section-title">7.5 Force Overwriting of a File (<code>-f</code>)</h2>
+                        <p>
+                            In Listing 7.5.1 we can see that we have two files,
+                            <code><b>a.txt</b></code> and <code><b>b.txt</b></code>.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -l
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.5.1:</span>
+                                <span class="list-description">$ ls -l</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:58</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>root</code>
+                                <code>staff</code>
+                                <code class="align-right">6</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:55</code>
+                                <code>b.txt</code>
+                            </div>
+                        </div>
+                        <p>
+                            When looking at Listing 7.5.1 we can see that the two files listed are owned by two different users. 
+                            The first file, <code><b>a.txt</b></code>>, is owned by user <code><b>markbates</b></code>, 
+                            while the second file is owned by <code><b>root</b></code>.
+                        </p>
+                        <p>
+                            What would happen if we tried to copy
+                            <code><b>a.txt</b></code> to <code><b>b.txt</b></code>?
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.5.2:</span>
+                                <span class="list-description">$ cp a.txt b.txt</span>
+                            </div>
+                            <div class="code-description code-description-grid-row">
+                                <code>cp: b.txt: Permission denied</code>
+                            </div>
+                        </div>
+                        <p>
+                            As we can see in Listing 7.5.2 we get an error when trying to overwrite 
+                            <code><b>b.txt</b></code> with <code><b>a.txt</b></code>. 
+                            We don’t have permission to do that. 
+                            When errors such as this occur we can use the <code><b>-f</b></code>
+                            flag to force the copying of the source file to the target file.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp -f a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.5.3:</span>
+                                <span class="list-description">$ ls -l</span>
+                            </div>
+                            <div class="code-description code-description-grid2">
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">13:58</code>
+                                <code>a.txt</code>
+                                <code>-rw-r--r--</code>
+                                <code class="align-right">1</code>
+                                <code>markbates</code>
+                                <code>staff</code>
+                                <code class="align-right">0</code>
+                                <code>Dec</code>
+                                <code class="align-right">18</code>
+                                <code class="align-right">14:57</code>
+                                <code>b.txt</code>
+                            </div>
+                        </div>
+                        <p>
+                            Listing 7.5.3 shows that by using the <code><b>-f</b></code>
+                            flag we were able to successfully overwrite the target file, 
+                            <code><b>b.txt</b></code>, with the contents of the source file, <code><b>a.txt</b></code>.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="7.6_confirm_overwriting_of_a_file_(-i)">
+                        <h2 class="sub-section-title">7.6 Confirm Overwriting of a File (<code>-i</code>)</h2>
+                        <p>
+                            When you are about to copy over several files at once, and some of the target files already exist, 
+                            it may be beneficial to confirm that you do in fact want to copy the source file and replace the target file.
+                        </p>
+                        <p>
+                            <code><b>cp</b></code> will happily promt you to confirm that you are 
+                            about to overwrite another file if you use the <code><b>-i</b></code> flag.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ cp -i a.txt b.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 7.6.1:</span>
+                                <span class="list-description">$ cp -i a.txt b.txt</span>
+                            </div>
+                            <div class="code-description">
+                                <code>overwrite b.txt? (y/n [n])</code>
+                            </div>
+                        </div>
+                        <p>
+                            In Listing 7.6.1, we are presented with a promt asking us to confirm, <code><b>y</b></code>
+                            or <code><b>n</b></code>, wether to overwrite the target file.
+                            A response of <code><b>y</b></code> will overwrite the file.
+                            A response of <code><b>n</b></code> will skip the file and move on to the next copy, if there is one.
+                        </p>
+                    </div>
+                </article>
+            </section>
+            <section class="main-section" id="8._deleting_files_(rm)">
+                <header class="main-header">8. Deleting Files (<code>rm</code>)</header>
+                <article>
+                    <p>
+                        The <code><b>rm</b></code> command is used to delete files and folders.
+                        It supports the same flags and arguments as the <code><b>cp</b></code>
+                        command that we learned about in <a class="internal-links" href="#7._copying_files_(cp)">Section 7</a>.
+                    </p>
+                    <div class="code-box">
+                        <div class="code-highlight">
+                            <code>
+                                $ rm -v a.txt
+                            </code>
+                        </div>
+                    </div>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 8.1.1:</span>
+                            <span class="list-description">$ rm -v a.txt</span>
+                        </div>
+                        <div class="code-description">
+                            <code>a.txt</code>
+                        </div>
+                    </div>
+                    <p>
+                        Listing 8.1.1 uses the <code><b>-v</b></code>
+                        flag to list files that were deleted using the <code><b>rm</b></code> command.
+                    </p>
+                </article>
+            </section>
+            <section class="main-section" id="9._moving_files_(mv)">
+                <header class="main-header">9. Moving Files (<code>mv</code>)</header>
+                <article>
+                    <p>
+                        The process for moving files is almost identical to that of copying files,
+                        which we learned about in <a class="internal-links" href="#7._copying_files_(cp)">Section 7</a>.
+                    </p>
+                    <p>
+                        <code><b>mv</b></code> supports the same flags as <code><b>co</b></code>.
+                        In reality the <code><b>mv</b></code> command is realle just a combination of
+                        <code><b>cp</b></code> and <code><b>rm</b></code>
+                        to achieve the desired outcome of moving a file from one location to another.
+                    </p>
+                    <div class="code-box">
+                        <div class="code-highlight">
+                            <code>
+                                $ mv -v a.txt b.txt
+                            </code>
+                        </div>
+                    </div>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 9.1.1:</span>
+                            <span class="list-description">$ mv -v a.txt b.txt</span>
+                        </div>
+                        <div class="code-description">
+                            <code>a.txt -> b.txt</code>
+                        </div>
+                    </div>
+                    <p>
+                        We can achieve the same effect from Listing 9.1.1 by using the 
+                        <code><b>cp</b></code> and <code><b>rm</b></code> commands.
+                        This can be useful when trying to move a file across file systems, as the
+                        <code><b>mv</b></code> command doesn't support that.
+                    </p>
+                    <div class="code-box">
+                        <div class="code-highlight code-description-grid-row">
+                            <code>
+                                $ cp a.txt b.txt
+                            </code>
+                            <code>
+                                $ rm a.txt
+                            </code>
+                        </div>
+                    </div>
+                    <div class="code-listing">
+                        <div class="code-heading">
+                            <span class="list-number">Listing 9.1.2:</span>
+                            <span class="list-description">$ ls -l</span>
+                        </div>
+                        <div class="code-description code-description-grid2">
+                            <code>-rw-r--r--</code>
+                            <code class="align-right">1</code>
+                            <code>markbates</code>
+                            <code>staff</code>
+                            <code class="align-right">0</code>
+                            <code>Dec</code>
+                            <code class="align-right">18</code>
+                            <code class="align-right">16:20</code>
+                            <code>b.txt</code>
+                        </div>
+                    </div>
+                    <p>
+                        Listing 9.1.2 shows that we were able to replicate the behavior of
+                        <code><b>mv</b></code> using the
+                        <code><b>cp</b></code> and <code><b>rm</b></code> commands.
+                    </p>
+                </article>
+            </section>
+            <section class="main-section" id="10._input_/_output_(|,_>)">
+                <header class="main-header">10. Input / Output (<code>|</code>, <code>></code>)</header>
+                <article>
+                    <p>
+                        The Unix philosophy, which you’ll hear repeated often, is “do one thing, and do it well”. 
+                        This theme is evident as we move through this book. 
+                        Each command covered does one thing, and does it well.
+                    </p>
+                    <div class="sub-section" id="10.1_redirecting_output_(|)">
+                        <h2 class="sub-section-title">10.1 Redirecting Output (<code>|</code>)</h2>
+                        <p>
+                            With these seemingly small individual commands, we can build 
+                            some pretty impressive work flows by redirecting the output of one command to the input to another command. 
+                            This is made possible by using the “pipe” operator, <code><b>|</b></code>.
+                        </p>
+                        <p>
+                            In the following example, we “pipe” the output of the 
+                            <code><b>ls</b></code> command to the input of the 
+                            <code><b>grep</b></code> command to find all the files in my home directory 
+                            that contain an underscore, <code><b>_</b></code>.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -a ~ | grep _
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 10.1.1:</span>
+                                <span class="list-description">$ ls -a ~ | grep _</span>
+                            </div>
+                            <div class="code-description code-description-grid-row">
+                                <code>.DS_Store</code>
+                                <code>.bash_history</code>
+                                <code>.bash_profile</code>
+                                <code>.guard_history</code>
+                                <code>.pry_history</code>
+                                <code>.psql_history</code>
+                                <code>.rediscli_history</code>
+                                <code>.scala_history</code>
+                            </div>
+                        </div>
+                        <p>
+                            When using the <code><b>|</b></code> 
+                            operator we can chain together any number of commands. 
+                            For example, we can take the output of Listing 10.1.1 and pass it to the 
+                            <code><b>sed</b></code> command from Chapter 7 (Not available in this version) and change all of the underscores to dashes.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -a ~ | grep _ | sed "s/_/-/g"
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 10.1.2:</span>
+                                <span class="list-description">$ ls -a ~ | grep _ | sed "s/_/-/g"</span>
+                            </div>
+                            <div class="code-description code-description-grid-row">
+                                <code>.DS-Store</code>
+                                <code>.bash-history</code>
+                                <code>.bash-profile</code>
+                                <code>.guard-history</code>
+                                <code>.pry-history</code>
+                                <code>.psql-history</code>
+                                <code>.rediscli-history</code>
+                                <code>.scala-history</code>
+                            </div>
+                        </div>
+                        <p>
+                            Listing 10.1.2 shows the result of chaining together the 
+                            <code><b>ls</b></code>, 
+                            <code><b>grep</b></code>, and
+                            <code><b>sed</b></code> commands using the
+                            <code><b>|</b></code> operator.
+                        </p>
+                    </div>
+                    <div class="sub-section" id="10.2_writing_to_a_file_(>)">
+                        <h2 class="sub-section-title">10.2 Writing to a File (<code>></code>)</h2>
+                        <p>
+                            In addition to redirecting the output from one process and sending it to another process,
+                            we can also write that output to a file using the <code><b>></b></code> operator.
+                        </p>
+                        <div class="code-box">
+                            <div class="code-highlight">
+                                <code>
+                                    $ ls -a ~ | grep _ > underscores.txt
+                                </code>
+                            </div>
+                        </div>
+                        <div class="code-listing">
+                            <div class="code-heading">
+                                <span class="list-number">Listing 10.2.1:</span>
+                                <span class="list-description">$ cat underscores.txt</span>
+                            </div>
+                            <div class="code-description code-description-grid-row">
+                                <code>.DS_Store</code>
+                                <code>.bash_history</code>
+                                <code>.bash_profile</code>
+                                <code>.guard_history</code>
+                                <code>.pry_history</code>
+                                <code>.psql_history</code>
+                                <code>.rediscli_history</code>
+                                <code>.scala_history</code>
+                            </div>
+                        </div>
+                        <p>
+                            Listing 10.2.1 shows the contents of <code><b>underscores.txt</b></code> file
+                            (using <code><b>cat</b></code>), which contains the results of our search
+                            for files in the home directory that contain underscores.
+                        </p>
+                    </div>
+                </article>
+            </section>
+            <section class="main-section" id="11._reference">
+                <header class="main-header">11. Reference</header>
+                <article>
+                    <p>
+                        All the information presented in this Technical Documentation page was taken from the book
+                        <a class="internal-links" href="http://conqueringthecommandline.com/book/basics">Conquering The Command Line</a>.
+                    </p>
+                </article>
+            </section>
+            <footer id="footer-wrapper">
+                <div id="author">The Good Pipe</div>
+                <div id="copyright">Copyright 2020</div>
+            </footer>
+        </main>
+    </body>
+</html>
